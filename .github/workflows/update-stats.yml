@@ -1,0 +1,26 @@
+name: Update GitHub Stats
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每天0点自动更新（UTC时间，对应北京时间8点）
+  workflow_dispatch: # 允许手动触发更新
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate GitHub Stats
+        uses: lowlighter/metrics@latest
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # 自动生成，无需手动添加
+          user: chinabing # 你的GitHub用户名，不用改
+          filename: github-stats.svg # 生成的统计图片文件名
+          config_timezone: Asia/Shanghai # 时区设置为中国
+          plugin_languages: yes # 显示语言占比
+          plugin_languages_ignored: html,css # 隐藏不相关的语言
+      - name: Commit and push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add github-stats.svg
+          git commit -m "自动更新GitHub统计" || exit 0
+          git push
