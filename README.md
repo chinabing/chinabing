@@ -1,5 +1,5 @@
 ## Hi 👋
-[![chinabing's GitHub stats](https://cdn.jsdelivr.net/gh/anuraghazra/github-readme-stats@latest/api?username=chinabing&show_icons=true&theme=tokyonight)](https://github.com/anuraghazra/github-readme-stats)
+[![chinabing's GitHub stats](./github-stats.svg)](https://github.com/chinabing)
 <!--
 **chinabing/chinabing** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
