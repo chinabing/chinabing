@@ -1,5 +1,8 @@
 ## Hi 👋
-[![chinabing's GitHub stats](./github-stats.svg)](https://github.com/chinabing)
+<!-- 个人总统计 -->
+![GitHub Stars](https://img.shields.io/github/stars/chinabing?label=Total%20Stars&style=for-the-badge&color=blue)
+![GitHub Commits](https://img.shields.io/github/commit-activity/y/chinabing?label=Yearly%20Commits&style=for-the-badge&color=green)
+![GitHub Repos](https://img.shields.io/github/repo-size/chinabing?label=Repo%20Size&style=for-the-badge&color=orange)
 <!--
 **chinabing/chinabing** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
