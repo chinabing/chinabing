@@ -1,6 +1,7 @@
 ## Hi 👋
 <!-- 个人总统计 -->
-
+<!-- 替换第2行，这个是目前最稳定的国内可用方案 -->
+[![chinabing's GitHub stats](https://cdn.jsdelivr.net/gh/anuraghazra/github-readme-stats@latest/api?username=chinabing&show_icons=true&theme=tokyonight)](https://github.com/anuraghazra/github-readme-stats)
 <!--
 **chinabing/chinabing** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
