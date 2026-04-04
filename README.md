@@ -1,6 +1,6 @@
 ## Hi 👋
 <!-- 个人总统计 -->
-#[![chinabing's GitHub stats](./github-stats.svg)](https://github.com/chinabing)
+
 <!--
 **chinabing/chinabing** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
