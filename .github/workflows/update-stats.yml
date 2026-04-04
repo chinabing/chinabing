@@ -1,32 +1,48 @@
-name: Update GitHub Stats
+name: Update GitHub Stats (Official)
 on:
   schedule:
-    - cron: '0 3 * * *'
+    - cron: '0 3 * * *' # 每天北京时间11点自动更新
   workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
 
-      - name: 生成简洁版GitHub统计卡片
-        uses: readme-tools/github-readme-stats-action@v0.1.0 # 换用稳定旧版本
+      - name: 设置Node.js环境
+        uses: actions/setup-node@v4
         with:
-          card: stats
-          options: >
-            username=chinabing
-            &show_icons=true
-            &theme=tokyonight
-            &hide=contribs,reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage
-            &hide_border=true
-            &card_width=450
-          path: stats.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
+          node-version: '20'
 
-      - name: 提交并推送卡片
+      - name: 克隆官方github-readme-stats
+        run: git clone https://github.com/anuraghazra/github-readme-stats.git
+
+      - name: 安装依赖
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          cd github-readme-stats
+          npm ci
+
+      - name: 生成统计卡片
+        run: |
+          cd github-readme-stats
+          node -e "
+            const { renderStatsCard } = require('./src/renderers/stats-card.js');
+            const fs = require('fs');
+            const card = renderStatsCard({
+              username: 'chinabing',
+              show_icons: true,
+              theme: 'tokyonight',
+              hide: ['contribs', 'reviews', 'discussions_started', 'discussions_answered', 'prs_merged', 'prs_merged_percentage'],
+              hide_border: true,
+              card_width: 450
+            });
+            fs.writeFileSync('../stats.svg', card);
+          "
+
+      - name: 提交并推送
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add stats.svg
-          git commit -m "自动更新GitHub统计卡片" || exit 0
+          git commit -m "更新GitHub统计卡片" || exit 0
           git push
