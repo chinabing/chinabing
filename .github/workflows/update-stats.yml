@@ -1,8 +1,8 @@
 name: Update GitHub Stats
 on:
   schedule:
-    - cron: '0 3 * * *' # 每天北京时间11点自动更新
-  workflow_dispatch: # 允许手动触发更新
+    - cron: '0 3 * * *'
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,15 +10,15 @@ jobs:
       - uses: actions/checkout@v5
 
       - name: 生成简洁版GitHub统计卡片
-        uses: readme-tools/github-readme-stats-action@v1
+        uses: readme-tools/github-readme-stats-action@v0.1.0 # 换用稳定旧版本
         with:
           card: stats
-          # 去掉了有bug的hide_border参数
           options: >
             username=chinabing
             &show_icons=true
             &theme=tokyonight
             &hide=contribs,reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage
+            &hide_border=true
             &card_width=450
           path: stats.svg
           token: ${{ secrets.GITHUB_TOKEN }}
