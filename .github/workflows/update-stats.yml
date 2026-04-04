@@ -13,13 +13,12 @@ jobs:
         uses: readme-tools/github-readme-stats-action@v1
         with:
           card: stats
-          # 核心配置：只保留截图里的5项统计，隐藏所有多余内容
+          # 去掉了有bug的hide_border参数
           options: >
             username=chinabing
             &show_icons=true
             &theme=tokyonight
             &hide=contribs,reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage
-            &hide_border=true
             &card_width=450
           path: stats.svg
           token: ${{ secrets.GITHUB_TOKEN }}
