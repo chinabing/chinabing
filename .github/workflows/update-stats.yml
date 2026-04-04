@@ -1,26 +1,33 @@
 name: Update GitHub Stats
 on:
   schedule:
-    - cron: '0 0 * * *' # 每天0点自动更新（UTC时间，对应北京时间8点）
+    - cron: '0 3 * * *' # 每天北京时间11点自动更新
   workflow_dispatch: # 允许手动触发更新
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Generate GitHub Stats
-        uses: lowlighter/metrics@latest
+      - uses: actions/checkout@v5
+
+      - name: 生成简洁版GitHub统计卡片
+        uses: readme-tools/github-readme-stats-action@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }} # 自动生成，无需手动添加
-          user: chinabing # 你的GitHub用户名，不用改
-          filename: github-stats.svg # 生成的统计图片文件名
-          config_timezone: Asia/Shanghai # 时区设置为中国
-          plugin_languages: yes # 显示语言占比
-          plugin_languages_ignored: html,css # 隐藏不相关的语言
-      - name: Commit and push
+          card: stats
+          # 核心配置：只保留截图里的5项统计，隐藏所有多余内容
+          options: >
+            username=chinabing
+            &show_icons=true
+            &theme=tokyonight
+            &hide=contribs,reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage
+            &hide_border=true
+            &card_width=450
+          path: stats.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 提交并推送卡片
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add github-stats.svg
-          git commit -m "自动更新GitHub统计" || exit 0
+          git add stats.svg
+          git commit -m "自动更新GitHub统计卡片" || exit 0
           git push
